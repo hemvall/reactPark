@@ -227,7 +227,7 @@
 .modalSub {
   margin: 0 0 1.25rem;
   font-size: 0.85rem;
-  color: var(--color-muted);
+  color: #fff;
 }
 
 .modalDetails {
@@ -288,6 +288,6 @@
 }
 
 .empty {
-  color: var(--color-muted);
+  color: #fff;
   font-size: 0.95rem;
 }
