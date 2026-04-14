@@ -18,7 +18,7 @@ export default function Navbar() {
 
   return (
     <nav className={styles.nav}>
-      <Link to="/" className={styles.brand}>ParkingApp</Link>
+      <Link to="/" className={styles.brand}>ParkWise</Link>
       <div className={styles.links}>
         {user?.role === 'USER' && (
           <>
