@@ -17,6 +17,11 @@
   color: var(--color-accent);
   letter-spacing: 0.02em;
   text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.brand:hover {
+  opacity: 0.8;
 }
 
 .links {
@@ -25,18 +30,49 @@
   gap: 1.5rem;
 }
 
-.links a {
-  color: rgba(255, 255, 255, 0.85);
+/* ── Lien nav générique ─────────────────────────────────── */
+.navLink {
+  position: relative;
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   font-size: 0.95rem;
   font-weight: 500;
-  transition: color 0.15s;
+  padding-bottom: 4px;
+  transition: color 0.2s;
 }
 
-.links a:hover {
-  color: var(--color-secondary);
+/* Underline animé au hover */
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-secondary);
+  border-radius: 2px;
+  transition: width 0.25s ease;
 }
 
+.navLink:hover {
+  color: #fff;
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+/* ── Page active ────────────────────────────────────────── */
+.active {
+  color: #fff !important;
+}
+
+.active::after {
+  width: 100% !important;
+  background: var(--color-accent) !important;
+}
+
+/* ── Déconnexion ────────────────────────────────────────── */
 .logout {
   background: none;
   border: 1px solid rgba(255, 255, 255, 0.25);
@@ -44,16 +80,22 @@
   padding: 0.35rem 0.9rem;
   cursor: pointer;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.85);
-  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  color: rgba(255, 255, 255, 0.75);
+  transition: border-color 0.2s, color 0.2s, background 0.2s, transform 0.15s;
 }
 
 .logout:hover {
   border-color: var(--color-accent);
   color: var(--color-accent);
   background: rgba(255, 158, 66, 0.08);
+  transform: translateY(-1px);
 }
 
+.logout:active {
+  transform: translateY(0);
+}
+
+/* ── Se connecter ───────────────────────────────────────── */
 .loginBtn {
   padding: 0.4rem 1rem;
   background: var(--color-accent);
@@ -62,10 +104,15 @@
   font-size: 0.9rem;
   font-weight: 700;
   text-decoration: none;
-  transition: background 0.15s;
+  transition: background 0.2s, transform 0.15s;
 }
 
 .loginBtn:hover {
   background: var(--color-accent-hover) !important;
   color: var(--color-dark) !important;
+  transform: translateY(-1px);
+}
+
+.loginBtn:active {
+  transform: translateY(0);
 }

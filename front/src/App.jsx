@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
-import { AuthProvider, useAuth } from './context/AuthContext'
+import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
@@ -17,9 +17,7 @@ import GuidancePage from './pages/GuidancePage'
 import PWAInstallBanner from './components/PWAInstallBanner'
 
 function HomeRoute() {
-  const { user } = useAuth()
-  if (!user) return <Home />
-  return <Navigate to={user.role === 'ADMIN' ? '/admin/parkings' : '/user/parkings'} replace />
+  return <Home />
 }
 
 function AppRoutes() {
