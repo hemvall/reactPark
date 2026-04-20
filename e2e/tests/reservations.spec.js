@@ -53,9 +53,8 @@ test.describe('Réservations — parcours utilisateur', () => {
     // Preset 1h
     await page.getByRole('button', { name: '1h' }).click()
 
-    // Sélectionner la première place dans la section "Sélectionner une place"
-    const spotsSection = page.locator('div').filter({ hasText: /^Sélectionner une place/ }).last()
-    const firstSpot = spotsSection.getByRole('button').first()
+    // Sélectionner la première place (numéros purement numériques, ex : "1", "2")
+    const firstSpot = page.getByRole('button', { name: /^\d+$/ }).first()
     await firstSpot.click()
 
     // Soumettre
