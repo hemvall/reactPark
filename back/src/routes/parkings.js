@@ -35,13 +35,32 @@ router.get('/', wrap(async (req, res) => {
 
 router.get('/:id', wrap(async (req, res) => {
   const { id } = req.params
+  const now = new Date()
   const parking = await prisma.parking.findUnique({
     where: { id },
-    include: { spots: true },
+    include: {
+      spots: {
+        include: {
+          reservations: {
+            where: { status: 'ACTIVE', endDate: { gt: now } },
+            select: { id: true },
+          },
+        },
+      },
+    },
   })
 
   if (!parking) return notFound(res, 'Parking')
-  return res.json({ data: parking, error: null })
+
+  const data = {
+    ...parking,
+    spots: parking.spots.map(({ reservations, ...s }) => ({
+      ...s,
+      isAvailable: reservations.length === 0,
+    })),
+  }
+
+  return res.json({ data, error: null })
 }))
 
 router.post('/', requireAdmin, wrap(async (req, res) => {
