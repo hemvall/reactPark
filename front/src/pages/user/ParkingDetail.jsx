@@ -202,7 +202,8 @@ export default function ParkingDetail() {
                   type="button"
                   className={`${styles.spot} ${selectedSpot === spot.id ? styles.selected : ''}`}
                   onClick={() => setSelectedSpot(spot.id)}
-                  title={`Place ${spot.number}`}
+                  disabled={spot.isAvailable === false}
+                  title={spot.isAvailable === false ? `Place ${spot.number} — occupée` : `Place ${spot.number}`}
                 >
                   {spot.number}
                 </button>
