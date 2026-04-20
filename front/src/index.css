@@ -5,42 +5,100 @@
 }
 
 :root {
-  --color-bg: #FAF8F2;
-  --color-surface: #ffffff;
-  --color-primary: #0000FF;
-  --color-primary-hover: #0000CC;
+  /* Surfaces */
+  --color-bg: #F9F6EF;
+  --color-bg-elevated: #FDFBF7;
+  --color-surface: #FFFFFF;
+  --color-surface-soft: #F0EDE6;
+
+  /* Brand — deep navy primary + sky blue secondary */
+  --color-primary: #0A0A2E;
+  --color-primary-hover: #12124A;
   --color-secondary: #00A0F3;
-  --color-secondary-hover: #0085CC;
-  --color-dark: #060035;
+  --color-secondary-hover: #0088D1;
+  --color-dark: #05051A;
+
   --color-accent: #FF9E42;
-  --color-accent-hover: #e8892a;
-  --color-text: #060035;
-  --color-muted: #5a547a;
-  --color-border: #ddd8f0;
-  --color-danger: #dc2626;
-  --color-danger-hover: #b91c1c;
-  --color-success: #16a34a;
-  --radius: 8px;
-  --shadow-sm: 0 1px 4px rgba(6, 0, 53, 0.08);
-  --shadow-md: 0 4px 12px rgba(6, 0, 53, 0.12);
-  --color-heading-on-bg: #ffffff;
+  --color-accent-hover: #E8872A;
+  --color-accent-soft: rgba(255, 158, 66, 0.14);
+
+  /* Text */
+  --color-text: #0A0A2E;
+  --color-text-soft: #1A1A4A;
+  --color-muted: #5A6080;
+  --color-border: #D8D4C8;
+  --color-border-strong: #B8B4A8;
+  --color-heading-on-bg: #0A0A2E;
+
+  /* Status */
+  --color-danger: #E03E4E;
+  --color-danger-hover: #C0303F;
+  --color-success: #0EA26A;
+  --color-warning: #FF9E42;
+
+  /* Shape */
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* Layered shadows */
+  --shadow-sm: 0 1px 2px rgba(10, 10, 46, 0.04), 0 2px 6px rgba(10, 10, 46, 0.06);
+  --shadow-md: 0 2px 6px rgba(10, 10, 46, 0.05), 0 10px 24px -8px rgba(10, 10, 46, 0.14);
+  --shadow-lg: 0 4px 12px rgba(10, 10, 46, 0.06), 0 24px 48px -12px rgba(10, 10, 46, 0.22);
+  --shadow-accent: 0 10px 28px -8px rgba(255, 158, 66, 0.50);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Fonts */
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+  --font-body: 'Manrope', ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
 }
 
 html {
   font-size: 16px;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, sans-serif;
-  background-color: var(--color-bg);
-  background-image: url('/Gestion moderne de parking lumineux.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+  font-family: var(--font-body);
+  font-feature-settings: 'ss01', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   color: var(--color-text);
-  line-height: 1.5;
+  line-height: 1.55;
   min-height: 100vh;
+  background-color: var(--color-bg);
+  /* Gradient mesh atmosphere */
+  background-image:
+    radial-gradient(at 12% 8%, rgba(0, 224, 184, 0.10) 0px, transparent 45%),
+    radial-gradient(at 88% 4%, rgba(46, 110, 168, 0.12) 0px, transparent 50%),
+    radial-gradient(at 78% 92%, rgba(0, 224, 184, 0.08) 0px, transparent 55%),
+    radial-gradient(at 18% 96%, rgba(11, 31, 58, 0.08) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+/* Subtle grain texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.04 0 0 0 0 0.08 0 0 0 0 0.18 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+#root { position: relative; z-index: 1; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--color-heading-on-bg);
+  line-height: 1.15;
 }
 
 a {
@@ -48,10 +106,49 @@ a {
   text-decoration: none;
 }
 
-button {
+button, input, select, textarea {
   font-family: inherit;
+  font-size: inherit;
 }
 
-input, select, textarea {
-  font-family: inherit;
+button { cursor: pointer; }
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-primary);
+}
+
+/* ----- Animations ----- */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translate3d(0, 14px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes pulseDot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(14, 162, 106, 0.55); }
+  50%      { box-shadow: 0 0 0 6px rgba(14, 162, 106, 0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.fadeIn { animation: fadeUp 0.6s var(--ease-out) both; }
+.stagger > *       { animation: fadeUp 0.55s var(--ease-out) both; }
+.stagger > *:nth-child(1) { animation-delay: 0.04s; }
+.stagger > *:nth-child(2) { animation-delay: 0.10s; }
+.stagger > *:nth-child(3) { animation-delay: 0.16s; }
+.stagger > *:nth-child(4) { animation-delay: 0.22s; }
+.stagger > *:nth-child(5) { animation-delay: 0.28s; }
+.stagger > *:nth-child(6) { animation-delay: 0.34s; }
+.stagger > *:nth-child(7) { animation-delay: 0.40s; }
+.stagger > *:nth-child(8) { animation-delay: 0.46s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

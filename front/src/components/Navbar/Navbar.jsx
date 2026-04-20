@@ -1,5 +1,5 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../../context/AuthContext'
 import styles from './Navbar.module.css'
 
 export default function Navbar() {
@@ -18,7 +18,9 @@ export default function Navbar() {
 
   return (
     <nav className={styles.nav}>
-      <Link to="/" className={styles.brand}>ParkingApp</Link>
+      <Link to="/" className={styles.brand}>
+        <img src="/logo-bg.png" alt="" className={styles.logo} />
+      </Link>
       <div className={styles.links}>
         {user?.role === 'USER' && (
           <>
