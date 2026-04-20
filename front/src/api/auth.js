@@ -11,6 +11,11 @@ export async function login(email, password) {
 }
 
 export async function register(email, password) {
-  const res = await client.post('/api/auth/register', { email, password })
-  return res.data
+  try {
+    const res = await client.post('/api/auth/register', { email, password })
+    return res.data
+  } catch (err) {
+    const message = err.response?.data?.error || 'Erreur de connexion au serveur.'
+    return { data: null, error: message }
+  }
 }
